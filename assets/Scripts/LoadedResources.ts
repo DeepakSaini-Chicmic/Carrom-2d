@@ -9,6 +9,8 @@ import {
 const { ccclass, property } = _decorator;
 @ccclass("LoadedResources")
 export class LoadedResources extends Component {
+
+  
   ArrayOfSprites: SpriteFrame[] = [];
   private static instance: LoadedResources = null;
   private LoadedResources() {}

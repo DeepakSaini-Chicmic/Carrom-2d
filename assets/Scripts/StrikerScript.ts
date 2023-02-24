@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Input, tween, UITransform, Event, Vec3, Vec2, math, RigidBody, RigidBody2D } from 'cc';
+import { _decorator, Component, Node, Input, tween, UITransform, Event, Vec3, Vec2, math, RigidBody, RigidBody2D, Slider, Label, AudioSource, director } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('StrikerScript')
@@ -21,13 +21,40 @@ export class StrikerScript extends Component {
 
     @property({type:Node})
     TargetArea:Node;
+
+    @property({type:Node})
+    Slider:Node;
+
+    @property({type:Node})
+    P1ScoreNode:Node;
+    
+    @property({type:Node})
+    P2ScoreNode:Node;
+
+    Reposition=false;
     
     cursorposition:Vec3;
     cursormovePositiononX=0;
     cursormovePositiononY=0;
+    StartingPosition:Vec3;
+
+
+    P1PreviousScore=0;
+    P2PreviousScore=0;
+    
+    P1NewScore=0;
+    P2NewScore=0;
 
     onLoad(){
-        let s;
+        this.FrontDirectionArrow.active=false;
+        this.GreenArrow.active=false;
+        this.BackDirectionArrow.active=false;
+        this.TargetArea.active=false;
+        this.P1ScoreNode.getComponent(Label).string=this.P1PreviousScore.toString();
+        this.P2ScoreNode.getComponent(Label).string=this.P2PreviousScore.toString();
+
+        this.node.getChildByName("Striker").name = "4";
+        
         let distancedifferenceonX =0;
         let distancedifferenceonY =0;
 
@@ -35,10 +62,11 @@ export class StrikerScript extends Component {
             .by(1,{angle:-360})
             .repeatForever()
             .start();
+        this.StartingPosition=this.node.getPosition();
         
         this.node.on(Input.EventType.TOUCH_START, (event)=>{
             this.cursorposition=event.getLocation();
-            // s=this.cursorposition
+            // this.StartingPosition=this.cursorposition
             console.log("Start position: ",this.cursorposition);
             this.MouseDirection();
         },this)
@@ -78,7 +106,8 @@ export class StrikerScript extends Component {
             distancedifferenceonX = this.cursormovePositiononX-  this.cursorposition.x;
             distancedifferenceonY = this.cursormovePositiononY-  this.cursorposition.y;
             this.node.getComponent(RigidBody2D).linearVelocity = new Vec2(-distancedifferenceonX*0.2,-distancedifferenceonY*0.2)
-
+            
+            this.node.getComponent(AudioSource).play()
             this.StrikerGreen.active=false;
             this.StrikerHoverRotating.active=false;
             this.FrontDirectionArrow.active=false;
@@ -86,6 +115,8 @@ export class StrikerScript extends Component {
             this.BackDirectionArrow.active=false;
             this.TargetArea.active=false;
             this.TargetArea.setScale(0,0);
+            this.Reposition=true;
+            
         },this)
         // this.node.on(Input.EventType.TOUCH_END, ()=>{
         //     this.StrikerHoverRotating.active=false;
@@ -95,7 +126,7 @@ export class StrikerScript extends Component {
         //     this.TargetArea.active=false;
         
         // },this)
-        
+        this.rePosition();
     }
 
     MouseDirection(){
@@ -106,13 +137,26 @@ export class StrikerScript extends Component {
             this.TargetArea.active=true;        
     }
 
+    rePosition() {
+        this.schedule(() => {
+          let velocity = this.node.getComponent(RigidBody2D).linearVelocity;
+          if ((velocity.x <= 0 && velocity.y<=0) && this.Reposition == true) {
+            this.node.setPosition(this.StartingPosition);
+            this.node.getComponent(RigidBody2D).linearVelocity=new Vec2(0,0);
+            this.Slider.getComponent(Slider).progress = 0.5;
+            this.Reposition = false;
+          }
+        }, 1)
+        this.StrikerGreen.active=true;
+        this.StrikerHoverRotating.active=true;
+      }
 
-    onEnable(){
-        this.FrontDirectionArrow.active=false;
-        this.GreenArrow.active=false;
-        this.BackDirectionArrow.active=false;
-        this.TargetArea.active=false;
+    
+    BackButton()
+    {
+        director.loadScene("UserValidationScene")
     }
+    
     start() {
 
     }

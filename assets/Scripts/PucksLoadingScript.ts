@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, SpriteFrame, Sprite } from 'cc';
+import { _decorator, Component, Node, SpriteFrame, Sprite, Collider2D, Contact2DType } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { PUCKTYPE } from './ConstantsScript';
@@ -14,6 +14,9 @@ export class PlucksLoadingScript extends Component {
 
     @property({type:SpriteFrame})
     White_Pluck : SpriteFrame = null;
+
+    puckNodeType:PUCKTYPE=PUCKTYPE.NONE;
+    
     
     start() {
 
@@ -23,18 +26,21 @@ export class PlucksLoadingScript extends Component {
         switch(Which_Puck){
             case PUCKTYPE.BLACK :
             {
+                this.puckNodeType = Which_Puck;
                 this.node.getComponent(Sprite).spriteFrame=this.Black_Pluck;
                 break;
             }
             
             case PUCKTYPE.RED : 
             {
+                this.puckNodeType = Which_Puck;
                 this.node.getComponent(Sprite).spriteFrame=this.Red_Pluck;
                 break;
             }
             
             case PUCKTYPE.WHITE:
             {
+                this.puckNodeType = Which_Puck;
                 this.node.getComponent(Sprite).spriteFrame=this.White_Pluck;
                 break;
             }

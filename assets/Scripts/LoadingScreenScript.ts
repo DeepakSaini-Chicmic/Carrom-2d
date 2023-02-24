@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, resources, Texture2D, Sprite, SpriteFrame, UITransform, tween, Vec3, Vec2, Vec4, } from 'cc';
+import { _decorator, Component, Node, resources, Texture2D, Sprite, SpriteFrame, UITransform, tween, Vec3, Vec2, Vec4, director, } from 'cc';
 const { ccclass, property } = _decorator;
 
 import InstanceOfObjects, { LoadedResources } from './LoadedResources';
@@ -24,6 +24,7 @@ export class DynamicResourceLoading extends Component {
                     this.node.getChildByName("Background").getComponent(Sprite).spriteFrame=element;
                 }
             });
+            director.loadScene("GamePlayScene");
         })
         .catch(err=>console.log("Background not Loaded!"))
         

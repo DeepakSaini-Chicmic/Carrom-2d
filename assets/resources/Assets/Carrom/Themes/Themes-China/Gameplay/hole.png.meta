@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "861a451a-04ab-4fc0-9208-36a1c0b9c35b",
+  "uuid": "7973c9bd-b92f-4667-b5d0-2fe9bd7b194c",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "861a451a-04ab-4fc0-9208-36a1c0b9c35b@6c48a",
+      "uuid": "7973c9bd-b92f-4667-b5d0-2fe9bd7b194c@6c48a",
       "displayName": "hole",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "861a451a-04ab-4fc0-9208-36a1c0b9c35b",
+        "imageUuidOrDatabaseUri": "7973c9bd-b92f-4667-b5d0-2fe9bd7b194c",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "861a451a-04ab-4fc0-9208-36a1c0b9c35b@f9941",
+      "uuid": "7973c9bd-b92f-4667-b5d0-2fe9bd7b194c@f9941",
       "displayName": "hole",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "861a451a-04ab-4fc0-9208-36a1c0b9c35b@6c48a",
+        "imageUuidOrDatabaseUri": "7973c9bd-b92f-4667-b5d0-2fe9bd7b194c@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "861a451a-04ab-4fc0-9208-36a1c0b9c35b@f9941"
+    "redirect": "7973c9bd-b92f-4667-b5d0-2fe9bd7b194c@f9941"
   }
 }
